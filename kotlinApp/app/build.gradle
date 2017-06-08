@@ -34,12 +34,12 @@ ext {
 }
 
 android {
-    compileSdkVersion 'android-O'
+    compileSdkVersion 26
     buildToolsVersion "26.0.0-rc1"
     defaultConfig {
         applicationId "com.example.android.emojicompat"
-        minSdkVersion 'O'
-        targetSdkVersion 'O'
+        minSdkVersion 26
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

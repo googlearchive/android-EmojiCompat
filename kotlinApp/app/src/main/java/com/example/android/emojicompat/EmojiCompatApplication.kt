@@ -29,6 +29,15 @@ import android.util.Log
  */
 class EmojiCompatApplication : Application() {
 
+    companion object {
+
+        private val TAG = "EmojiCompatApplication"
+
+        /** Change this to `false` when you want to use the downloadable Emoji font.  */
+        private val USE_BUNDLED_EMOJI = true
+
+    }
+
     override fun onCreate() {
         super.onCreate()
 
@@ -56,14 +65,6 @@ class EmojiCompatApplication : Application() {
                     })
         }
         EmojiCompat.init(config)
-    }
-
-    companion object {
-
-        private val TAG = "EmojiCompatApplication"
-
-        /** Change this to `false` when you want to use the downloadable Emoji font.  */
-        private val USE_BUNDLED_EMOJI = true
     }
 
 }

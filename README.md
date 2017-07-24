@@ -23,10 +23,6 @@ bundled or downloadable fonts.
 
 #### Use downloadable fonts
 
-***You need the beta version of Google Play Services to use this feature.*** Join
-[Google Play Services Public Beta Program][4] and make sure you have v11 installed on your device
-running Android O Developer Preview 2.
-
 For the downloadable font configuration, you need to create an instance of the [FontRequest][5]
 class, and provide the font provider authority, the font provider package, the font query, and a
 list of set of hashes for the certificates. For more information about FontRequest, refer to the

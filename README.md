@@ -51,7 +51,7 @@ EmojiCompat.init(new FontRequestEmojiCompatConfig(getApplicationContext(), fontR
                         public void onFailed(@Nullable Throwable throwable) {
                             Log.e(TAG, "EmojiCompat initialization failed", throwable);
                         }
-                    });)
+                    }));
 ```
 
 #### Use bundled font

@@ -16,10 +16,13 @@
 
 package com.example.android.emojicompat;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.text.emoji.EmojiCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import java.lang.ref.WeakReference;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -51,18 +54,32 @@ public class MainActivity extends AppCompatActivity {
 
         // Regular TextView without EmojiCompat support; you have to manually process the text
         final TextView regularTextView = findViewById(R.id.regular_text_view);
-        EmojiCompat.get().registerInitCallback(new EmojiCompat.InitCallback() {
-            @Override
-            public void onInitialized() {
-                final EmojiCompat compat = EmojiCompat.get();
-                regularTextView.setText(
-                        compat.process(getString(R.string.regular_text_view, EMOJI)));
-            }
-        });
+        EmojiCompat.get().registerInitCallback(new InitCallback(regularTextView));
 
         // Custom TextView
         final TextView customTextView = findViewById(R.id.emoji_custom_text_view);
         customTextView.setText(getString(R.string.custom_text_view, EMOJI));
+    }
+
+    private static class InitCallback extends EmojiCompat.InitCallback {
+
+        private final WeakReference<TextView> mRegularTextViewRef;
+
+        InitCallback(TextView regularTextView) {
+            mRegularTextViewRef = new WeakReference<>(regularTextView);
+        }
+
+        @Override
+        public void onInitialized() {
+            final TextView regularTextView = mRegularTextViewRef.get();
+            if (regularTextView != null) {
+                final EmojiCompat compat = EmojiCompat.get();
+                final Context context = regularTextView.getContext();
+                regularTextView.setText(
+                        compat.process(context.getString(R.string.regular_text_view, EMOJI)));
+            }
+        }
+
     }
 
 }

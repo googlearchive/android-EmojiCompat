@@ -17,15 +17,15 @@
 apply plugin: 'com.android.application'
 
 ext {
-    supportLibVersion = '26.0.0-beta1'
+    supportLibVersion = '26.0.0'
 }
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.0-rc1"
+    buildToolsVersion "26.0.0"
     defaultConfig {
         applicationId "com.example.android.emojicompat"
-        minSdkVersion 26
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -51,5 +51,5 @@ dependencies {
 
     // Test
     testCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.0'
 }

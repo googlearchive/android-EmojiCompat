@@ -18,14 +18,24 @@ package com.example.android.emojicompat;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.text.emoji.EmojiCompat;
+import android.support.text.emoji.FontRequestEmojiCompatConfig;
+import android.support.text.emoji.bundled.BundledEmojiCompatConfig;
+import android.support.v4.provider.FontRequest;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
+
+    /** Change this to {@code false} when you want to use the downloadable Emoji font. */
+    private static final boolean USE_BUNDLED_EMOJI = true;
 
     // [U+1F469] (WOMAN) + [U+200D] (ZERO WIDTH JOINER) + [U+1F4BB] (PERSONAL COMPUTER)
     private static final String WOMAN_TECHNOLOGIST = "\uD83D\uDC69\u200D\uD83D\uDCBB";
@@ -38,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        initEmojiCompat();
+
         setContentView(R.layout.activity_main);
 
         // TextView variant provided by EmojiCompat library
@@ -59,6 +72,37 @@ public class MainActivity extends AppCompatActivity {
         // Custom TextView
         final TextView customTextView = findViewById(R.id.emoji_custom_text_view);
         customTextView.setText(getString(R.string.custom_text_view, EMOJI));
+    }
+
+    private void initEmojiCompat() {
+        final EmojiCompat.Config config;
+        if (USE_BUNDLED_EMOJI) {
+            // Use the bundled font for EmojiCompat
+            config = new BundledEmojiCompatConfig(getApplicationContext());
+        } else {
+            // Use a downloadable font for EmojiCompat
+            final FontRequest fontRequest = new FontRequest(
+                    "com.google.android.gms.fonts",
+                    "com.google.android.gms",
+                    "Noto Color Emoji Compat",
+                    R.array.com_google_android_gms_fonts_certs);
+            config = new FontRequestEmojiCompatConfig(getApplicationContext(), fontRequest);
+        }
+
+        config.setReplaceAll(true)
+                .registerInitCallback(new EmojiCompat.InitCallback() {
+                    @Override
+                    public void onInitialized() {
+                        Log.i(TAG, "EmojiCompat initialized");
+                    }
+
+                    @Override
+                    public void onFailed(@Nullable Throwable throwable) {
+                        Log.e(TAG, "EmojiCompat initialization failed", throwable);
+                    }
+                });
+
+        EmojiCompat.init(config);
     }
 
     private static class InitCallback extends EmojiCompat.InitCallback {

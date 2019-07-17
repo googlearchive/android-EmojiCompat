@@ -17,8 +17,8 @@
 package com.example.android.emojicompat
 
 import android.os.Bundle
-import android.support.text.emoji.EmojiCompat
-import android.support.v7.app.AppCompatActivity
+import androidx.emoji.text.EmojiCompat
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
 import java.lang.ref.WeakReference
 

@@ -17,8 +17,8 @@
 package com.example.android.emojicompat
 
 import android.content.Context
-import android.support.text.emoji.widget.EmojiTextViewHelper
-import android.support.v7.widget.AppCompatTextView
+import androidx.emoji.widget.EmojiTextViewHelper
+import androidx.appcompat.widget.AppCompatTextView
 import android.text.InputFilter
 import android.util.AttributeSet
 

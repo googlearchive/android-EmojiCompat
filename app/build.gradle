@@ -28,7 +28,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -43,12 +43,14 @@ android {
 
 dependencies {
     // Support Libraries
-    compile "com.android.support:appcompat-v7:$supportLibVersion"
-    compile "com.android.support:support-emoji:$supportLibVersion"
-    compile "com.android.support:support-emoji-appcompat:$supportLibVersion"
-    compile "com.android.support:support-emoji-bundled:$supportLibVersion"
+    compile 'androidx.appcompat:appcompat:1.0.0'
+    compile 'androidx.emoji:emoji:1.0.0'
+    compile 'androidx.emoji:emoji-appcompat:1.0.0'
+    compile 'androidx.emoji:emoji-bundled:1.0.0'
 
     // Test
     testCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.0'
+    androidTestCompile 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
 }
